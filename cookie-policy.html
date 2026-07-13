@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cookie Policy | Service Hive</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Merriweather:ital@0;1&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="assets/logo-icon.png">
+    <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-bg"></div>
+
+        <a href="index.html" class="logo" style="text-decoration:none;">
+            <img src="assets/logo-icon.png" alt="Service Hive" class="logo-icon">
+            <img src="assets/logo-wordmark-light.png" alt="Service Hive" class="logo-wordmark">
+        </a>
+
+        <div class="menu-toggle" id="mobile-menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+        <div class="nav-links" id="nav-links">
+            <a href="index.html#home">Home</a>
+            <a href="index.html#qual">Hive Qual</a>
+            <a href="index.html#data">Data Collection</a>
+            <a href="index.html#secondary">Secondary Research</a>
+            <a href="index.html#growth">Growth Stack</a>
+            <a href="index.html#contact" class="btn">Contact Us</a>
+        </div>
+    </nav>
+
+    <div class="legal-page">
+        <a href="index.html" class="legal-back-link">&larr; Back to Service Hive</a>
+
+        <div class="legal-eyebrow">Legal</div>
+        <h1>Cookie Policy</h1>
+        <p class="legal-updated">Effective Date: June 8, 2026</p>
+
+        <p>This Cookie Policy explains how Service Hive ("we," "our," or "us") uses cookies and similar technologies on service-hive.pro (the "Website").</p>
+
+        <p>By continuing to browse or use service-hive.pro, you consent to our use of cookies in accordance with this Cookie Policy. You can manage or withdraw your consent at any time through your browser settings or our cookie preferences (where available).</p>
+
+        <h2>What Are Cookies?</h2>
+        <p>Cookies are small text files that are stored on your computer, tablet, or mobile device when you visit a website. They help websites function efficiently, remember your preferences, improve user experience, and provide insights into how visitors interact with the website.</p>
+
+        <h2>Types of Cookies We Use</h2>
+
+        <p><strong>1. Strictly Necessary Cookies</strong><br>
+        These cookies are essential for the operation and security of our Website. They enable core features such as secure login, page navigation, form submissions, and access to protected areas. The Website cannot function properly without these cookies.</p>
+
+        <p><strong>2. Analytics and Performance Cookies</strong><br>
+        These cookies help us understand how visitors use our Website by collecting anonymous information, including visitor numbers, pages viewed, time spent on the Website, and navigation patterns. This information helps us improve the performance, usability, and content of our Website.</p>
+
+        <p><strong>3. Functionality Cookies</strong><br>
+        These cookies remember your preferences and settings, allowing us to provide a more personalized browsing experience. For example, they may remember your preferred language or other website settings.</p>
+
+        <p><strong>4. Advertising and Targeting Cookies</strong><br>
+        These cookies collect information about your browsing activity to help deliver content and advertisements that are more relevant to your interests. They may also help measure the effectiveness of marketing campaigns. In certain cases, this information may be shared with trusted third-party service providers.</p>
+
+        <h2>Third-Party Cookies</h2>
+        <p>Some cookies on our Website may be placed by trusted third-party providers, such as analytics, marketing, or embedded content services. These third parties operate under their own privacy and cookie policies, and Service Hive does not control how they use these cookies.</p>
+
+        <h2>Managing Cookies</h2>
+        <p>You can control, block, or delete cookies at any time through your browser settings. Please note that disabling certain cookies, especially strictly necessary cookies, may affect the functionality and performance of the Website, and some features may not be available.</p>
+
+        <p>Most browsers allow you to:</p>
+        <ul>
+            <li>View stored cookies</li>
+            <li>Delete existing cookies</li>
+            <li>Block all or selected cookies</li>
+            <li>Receive notifications before cookies are stored</li>
+        </ul>
+        <p>For instructions on managing cookies, please refer to your browser's help documentation.</p>
+
+        <h2>Changes to This Cookie Policy</h2>
+        <p>Service Hive may update this Cookie Policy from time to time to reflect changes in technology, legal requirements, or our business practices. Any updates will be posted on this page along with the revised Effective Date.</p>
+
+        <h2>Contact Us</h2>
+        <p>If you have any questions about this Cookie Policy or our use of cookies, please contact us through the contact form available on service-hive.pro.</p>
+
+        <div class="legal-contact-box">
+            <strong>Related reading</strong>
+            <p style="margin-bottom:0; margin-top:0.5rem;">See our <a href="privacy-policy.html" target="_blank" rel="noopener" style="color: var(--primary-honey-dark); font-weight:600;">Privacy Policy</a> for full details on how we collect, use, and protect your information.</p>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <div class="footer-legal-links">
+            <a href="privacy-policy.html" target="_blank" rel="noopener">Privacy Policy</a>
+            <span class="footer-dot">•</span>
+            <a href="cookie-policy.html" target="_blank" rel="noopener">Cookie Policy</a>
+            <span class="footer-dot">•</span>
+            <a href="assets/documents/ServiceHive_GDPR_Policy.pdf" download>GDPR Policy (PDF)</a>
+        </div>
+        <p>&copy; 2026 Service Hive. All rights reserved. Service Hive.</p>
+    </div>
+
+    <script>
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navLinks = document.getElementById('nav-links');
+        const navItems = document.querySelectorAll('.nav-links a');
+        mobileMenu.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+        navItems.forEach(item => {
+            item.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
+    </script>
+
+</body>
+</html>
