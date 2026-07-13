@@ -1,509 +1,12 @@
-html_content = """<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Service Hive | The Modern Growth & Delivery Engine</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Merriweather:ital@0;1&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary-honey: #E5A91E;
-            --primary-honey-dark: #C99015;
-            --dark-text: #2B261C;
-            --light-text: #5A5243;
-            --light-bg: #FDFCF8;
-            --white: #FFFFFF;
-            --section-bg: #F4F1EA;
-            --accent-hex: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Poppins', sans-serif;
-            color: var(--dark-text);
-            background-color: var(--light-bg);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        h1, h2, h3, h4 {
-            font-weight: 700;
-            color: var(--dark-text);
-            margin-bottom: 1rem;
-        }
-
-        h1 { font-size: 3.5rem; line-height: 1.2; }
-        h2 { font-size: 2.5rem; position: relative; padding-bottom: 10px; }
-        h2::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 60px;
-            height: 4px;
-            background-color: var(--primary-honey);
-        }
-        h3 { font-size: 1.5rem; color: var(--primary-honey-dark); }
-
-        p {
-            font-size: 1.1rem;
-            color: var(--light-text);
-            margin-bottom: 1.5rem;
-        }
-
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
-
-        /* Navigation Redesign */
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            z-index: 1000;
-        }
-
-        .nav-bg {
-            position: absolute;
-            top: 0; left: 0; right: 0;
-            height: 66px; 
-            background-color: rgba(253, 252, 248, 0.98); /* Very light background */
-            /* Solid honeycomb pattern with 20% visibility */
-            background-image: url("data:image/svg+xml,%3Csvg width='40' height='69.28203230275509' viewBox='0 0 40 69.28203230275509' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M40 11.547005383792515L20 0L0 11.547005383792515l0 23.09401076758503L20 46.18802153517006L40 34.64101615137754zM20 69.28203230275509L0 57.73502691896258l0-23.09401076758503L20 23.09401076758503l20 11.547005383792515l0 23.09401076758503z' fill='%23e5a91e' fill-opacity='0.2' fill-rule='evenodd'/%3E%3C/svg%3E");
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            z-index: -2;
-        }
-
-        .logo {
-            display: flex;
-            align-items: flex-start;
-            z-index: 1001; 
-            padding: 5px 25px 0 5%; 
-        }
-
-        .logo img {
-            height: 115px; 
-            width: auto;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            align-items: center;
-            height: 66px; 
-            padding: 0 5%;
-        }
-
-        .nav-links a {
-            font-weight: 600;
-            color: var(--dark-text); /* Standard dark text */
-            transition: color 0.3s;
-        }
-
-        .nav-links a:hover {
-            color: var(--primary-honey);
-        }
-
-        /* Generic & Nav Button */
-        .btn {
-            background-color: var(--primary-honey);
-            color: var(--dark-text);
-            padding: 10px 24px; 
-            border-radius: 30px;
-            font-weight: 600;
-            transition: background 0.3s, transform 0.2s;
-            display: inline-block;
-            text-align: center;
-        }
-
-        .nav-links .btn {
-            padding: 6px 20px; /* Minimal padding for nav */
-        }
-
-        .btn:hover, .nav-links .btn:hover {
-            background-color: var(--primary-honey-dark);
-            color: white;
-            transform: translateY(-2px);
-        }
-
-        /* Hovering Bees Animation - Section Bound with Wide Movement */
-        .bee {
-            position: absolute; /* Bound to relative section */
-            font-size: 1.8rem;
-            z-index: 0; /* Behind content */
-            pointer-events: none; 
-            opacity: 0.6;
-            filter: drop-shadow(0 3px 5px rgba(0,0,0,0.15));
-        }
-
-        .bee-a { animation: sweep1 18s ease-in-out infinite alternate; }
-        .bee-b { animation: sweep2 22s ease-in-out infinite alternate-reverse; }
-        .bee-c { animation: sweep3 25s ease-in-out infinite alternate; }
-
-        @keyframes sweep1 {
-            0% { transform: translate(0, 0) rotate(-15deg); }
-            50% { transform: translate(25vw, 15vh) rotate(10deg); }
-            100% { transform: translate(50vw, -10vh) rotate(-15deg); }
-        }
-        @keyframes sweep2 {
-            0% { transform: translate(0, 0) rotate(15deg) scaleX(-1); }
-            50% { transform: translate(-30vw, -20vh) rotate(-10deg) scaleX(-1); }
-            100% { transform: translate(-55vw, 15vh) rotate(5deg) scaleX(-1); }
-        }
-        @keyframes sweep3 {
-            0% { transform: translate(0, 0) rotate(-5deg); }
-            50% { transform: translate(15vw, -25vh) rotate(20deg); }
-            100% { transform: translate(-15vw, 20vh) rotate(-10deg); }
-        }
-
-        /* Mobile Menu Toggle */
-        .menu-toggle {
-            display: none;
-            flex-direction: column;
-            cursor: pointer;
-            gap: 5px;
-            z-index: 1001;
-            height: 66px;
-            justify-content: center;
-            padding-right: 5%;
-        }
-
-        .menu-toggle span {
-            width: 25px;
-            height: 3px;
-            background-color: var(--dark-text);
-            transition: 0.3s;
-            border-radius: 2px;
-        }
-
-        /* Sections */
-        section {
-            padding: 50px 5%; 
-            position: relative; /* Anchor bees to section */
-            overflow: hidden; /* Ensure bees don't break layout width */
-        }
-        
-        /* Ensure content stays above bees */
-        .hero-content, .hero-image-container, .split-content, .split-image, .grid-2, .grid-3, .contact-grid {
-            position: relative;
-            z-index: 2;
-        }
-
-        /* Hero */
-        .hero {
-            min-height: 90vh; 
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding-top: 170px; 
-            padding-bottom: 2rem; 
-            background: linear-gradient(135deg, rgba(253,252,248,0.95) 0%, rgba(253,252,248,0.8) 100%), 
-                        url('https://images.unsplash.com/photo-1587049352847-4d4b1ed7ab8f?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80') center/cover;
-            gap: 4rem; 
-        }
-
-        .hero-content {
-            max-width: 600px;
-            flex: 1;
-        }
-
-        .hero-subtitle {
-            font-size: 1.25rem;
-            font-weight: 600;
-            color: var(--primary-honey-dark);
-            margin-bottom: 2rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        .hero-image-container {
-            flex: 1;
-            display: flex;
-            justify-content: flex-end; 
-            max-width: 650px; 
-            height: 600px; 
-        }
-
-        .hero-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: center;
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-            border: 4px solid var(--primary-honey);
-        }
-
-        #why-we-built {
-            padding-top: 3rem; 
-        }
-
-        /* Two Column Layouts */
-        .split-section {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 4rem;
-            align-items: stretch; 
-        }
-
-        .split-content {
-            flex: 1;
-            min-width: 300px;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .split-image {
-            flex: 1;
-            min-width: 300px;
-            position: relative;
-            display: flex;
-            align-items: center;
-        }
-
-        .split-image img {
-            width: 100%;
-            border-radius: 20px;
-            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
-        }
-
-        /* Grid Layouts */
-        .grid-2 {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .grid-3 {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        /* Cards */
-        .card {
-            background: var(--white);
-            padding: 2.5rem;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.04);
-            border-top: 5px solid var(--primary-honey);
-            transition: transform 0.3s;
-            position: relative;
-            overflow: hidden;
-            height: 100%;
-            z-index: 2;
-        }
-
-        .card:hover {
-            transform: translateY(-10px);
-        }
-        
-        .card::before {
-            content: '';
-            position: absolute;
-            top: -20px;
-            right: -20px;
-            width: 100px;
-            height: 100px;
-            background: var(--section-bg);
-            clip-path: var(--accent-hex);
-            opacity: 0.5;
-            z-index: -1;
-        }
-        
-        .icon-box {
-            width: 50px;
-            height: 50px;
-            background: var(--primary-honey);
-            clip-path: var(--accent-hex);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            margin-bottom: 1.5rem;
-            color: var(--dark-text);
-        }
-
-        /* Timeline / Pipeline */
-        .pipeline {
-            margin-top: 2rem;
-            border-left: 3px solid var(--primary-honey);
-            padding-left: 2rem;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .pipeline-step {
-            position: relative;
-            margin-bottom: 2rem;
-        }
-        
-        .pipeline-step:last-child {
-            margin-bottom: 0;
-        }
-
-        .pipeline-step::before {
-            content: '';
-            position: absolute;
-            left: -39px;
-            top: 0;
-            width: 20px;
-            height: 20px;
-            background: var(--white);
-            border: 4px solid var(--primary-honey);
-            border-radius: 50%;
-        }
-
-        .pipeline-step h4 {
-            color: var(--dark-text);
-            font-size: 1.25rem;
-            margin-bottom: 0.5rem;
-        }
-
-        /* Tiers Styling */
-        .tier-card {
-            background: var(--white);
-            border-radius: 12px;
-            padding: 2rem;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
-            border-left: 5px solid var(--primary-honey);
-            margin-bottom: 1.5rem;
-            z-index: 2;
-            position: relative;
-        }
-        
-        .tier-card.elite {
-            border-left: 5px solid #2B261C;
-            background: linear-gradient(to right, #ffffff, #f9f8f4);
-        }
-        
-        .tier-card.custom {
-            border-left: 5px solid #E5A91E;
-            background: #2B261C;
-            color: var(--white);
-        }
-        
-        .tier-card.custom h4, .tier-card.custom p {
-            color: var(--white);
-        }
-
-        /* Footer / Contact */
-        .contact-section {
-            background: var(--dark-text);
-            color: var(--white);
-            padding: 60px 5%; 
-        }
-
-        .contact-section h2, .contact-section h3 {
-            color: var(--white);
-        }
-        
-        .contact-section h2::after {
-            background-color: var(--primary-honey);
-        }
-
-        .contact-section p {
-            color: #d1cdc5;
-        }
-
-        .contact-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 15px;
-            word-break: break-word; 
-        }
-        
-        .contact-icon {
-            font-size: 1.5rem;
-            flex-shrink: 0; 
-        }
-        
-        .email-address {
-            white-space: nowrap;
-        }
-
-        .footer-bottom {
-            text-align: center;
-            padding: 2rem 5%;
-            background: #1A1710;
-            color: #8c867a;
-        }
-
-        /* ==========================================
-           RESPONSIVE DESIGN / MEDIA QUERIES
-           ========================================== */
-
-        @media screen and (max-width: 1024px) {
-            h1 { font-size: 3rem; }
-            h2 { font-size: 2.2rem; }
-            .hero { gap: 2rem; padding-top: 170px; min-height: auto; }
-            .hero-image-container { height: 500px; max-width: 450px; }
-            .split-section { gap: 3rem; }
-        }
-
-        @media screen and (max-width: 768px) {
-            .logo img { height: 80px; }
-            .nav-bg { height: 60px; }
-            .menu-toggle { display: flex; height: 60px; }
-            .nav-links {
-                position: fixed; top: 0; right: -100%; height: 100vh; width: 70%;
-                max-width: 300px; background-color: var(--white); flex-direction: column;
-                justify-content: center; align-items: center; gap: 2rem;
-                transition: 0.3s ease-in-out; box-shadow: -5px 0 15px rgba(0,0,0,0.1); padding: 2rem;
-            }
-            .nav-links.active { right: 0; }
-            .menu-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 6px); }
-            .menu-toggle.active span:nth-child(2) { opacity: 0; }
-            .menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -6px); }
-            h1 { font-size: 2.5rem; }
-            h2 { font-size: 2rem; }
-            section { padding: 40px 5%; }
-            .hero { flex-direction: column; text-align: center; padding-top: 140px; }
-            .hero-content { max-width: 100%; display: flex; flex-direction: column; align-items: center; }
-            .hero-image-container { width: 100%; max-width: 100%; height: 400px; margin-top: 2rem; justify-content: center; }
-            .split-section { flex-direction: column; gap: 2rem; }
-            #why-we-built .split-section { flex-direction: column-reverse; }
-            h2::after { left: 50%; transform: translateX(-50%); }
-            .split-content h2, .split-content h3 { text-align: center; }
-            #why-we-built blockquote { text-align: left; }
-            .card { padding: 1.5rem; }
-            .split-content[style*="padding: 3rem"] { padding: 1.5rem !important; }
-            .pipeline { margin-left: 10px; padding-left: 1.5rem; }
-            .pipeline-step::before { left: -31px; width: 16px; height: 16px; }
-            #growth h2 span { display: inline; font-size: 1.2rem; }
-            .contact-section h2::after { left: 0; transform: none; }
-            .contact-section { text-align: left; }
-            .email-address { white-space: normal; word-break: break-all; }
-            .bee { display: none; } /* Hide bees on mobile */
-        }
-
-        @media screen and (max-width: 480px) {
-            h1 { font-size: 2.2rem; }
-            .hero-image-container { height: 300px; }
-            .logo img { height: 65px; } 
-            .btn { width: 100%; } 
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Merriweather:ital@0;1&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="assets/logo-icon.png">
+    <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
 
@@ -512,8 +15,8 @@ html_content = """<!DOCTYPE html>
         <div class="nav-bg"></div>
 
         <div class="logo">
-            <!-- Reminder: Make sure "SERVICE HIVE FINAL LOGO blind with tag line.png" is saved in the same folder as this HTML file -->
-            <img src="SERVICE HIVE FINAL LOGO blind with tag line.png" alt="Service Hive Logo">
+            <img src="assets/logo-icon.png" alt="Service Hive" class="logo-icon">
+            <img src="assets/logo-wordmark-light.png" alt="Service Hive" class="logo-wordmark">
         </div>
         
         <!-- Mobile Menu Icon -->
@@ -527,6 +30,7 @@ html_content = """<!DOCTYPE html>
             <a href="#home">Home</a>
             <a href="#qual">Hive Qual</a>
             <a href="#data">Data Collection</a>
+            <a href="#secondary">Secondary Research</a>
             <a href="#growth">Growth Stack</a>
             <a href="#contact" class="btn">Contact Us</a>
         </div>
@@ -534,9 +38,9 @@ html_content = """<!DOCTYPE html>
 
     <!-- Hero Section -->
     <section id="home" class="hero">
-        <span class="bee bee-a" style="top: 20%; left: 5%;">🐝</span>
-        <span class="bee bee-b" style="top: 70%; right: 10%;">🐝</span>
-        <span class="bee bee-c" style="top: 85%; left: 45%;">🐝</span>
+        <span class="bee bee-a" style="top:20%; left:5%;">🐝</span>
+        <span class="bee bee-b" style="top:65%; left:85%;">🐝</span>
+        <span class="bee bee-c" style="top:40%; left:50%;">🐝</span>
 
         <div class="hero-content">
             <div class="hero-subtitle">The Modern Growth & Delivery Engine</div>
@@ -551,9 +55,9 @@ html_content = """<!DOCTYPE html>
 
     <!-- Why We Built The Hive -->
     <section id="why-we-built" style="background-color: var(--white); padding-bottom: 1rem;">
-        <span class="bee bee-c" style="top: 10%; left: 80%;">🐝</span>
-        <span class="bee bee-a" style="top: 50%; left: 20%;">🐝</span>
-        <span class="bee bee-b" style="top: 80%; right: 40%;">🐝</span>
+        <span class="bee bee-a" style="top:10%; left:80%;">🐝</span>
+        <span class="bee bee-b" style="top:70%; left:15%;">🐝</span>
+        <span class="bee bee-c" style="top:45%; left:45%;">🐝</span>
 
         <div class="split-section">
             <div class="split-image">
@@ -574,9 +78,9 @@ html_content = """<!DOCTYPE html>
 
     <!-- Hive Qual Section -->
     <section id="qual" style="background-color: var(--white); padding-top: 1rem;">
-        <span class="bee bee-b" style="top: 15%; left: 5%;">🐝</span>
-        <span class="bee bee-c" style="top: 40%; right: 5%;">🐝</span>
-        <span class="bee bee-a" style="top: 90%; left: 50%;">🐝</span>
+        <span class="bee bee-a" style="top:15%; left:15%;">🐝</span>
+        <span class="bee bee-b" style="top:60%; left:75%;">🐝</span>
+        <span class="bee bee-c" style="top:30%; left:50%;">🐝</span>
 
         <div class="split-section" style="align-items: center; margin-bottom: 2rem;">
             <div class="split-content">
@@ -610,9 +114,9 @@ html_content = """<!DOCTYPE html>
 
     <!-- Data Collection Section -->
     <section id="data" style="background-color: var(--section-bg);">
-        <span class="bee bee-a" style="top: 10%; right: 20%;">🐝</span>
-        <span class="bee bee-b" style="top: 60%; left: 5%;">🐝</span>
-        <span class="bee bee-c" style="top: 85%; right: 30%;">🐝</span>
+        <span class="bee bee-a" style="top:20%; left:85%;">🐝</span>
+        <span class="bee bee-b" style="top:75%; left:10%;">🐝</span>
+        <span class="bee bee-c" style="top:50%; left:40%;">🐝</span>
 
         <div style="text-align: center; max-width: 800px; margin: 0 auto 4rem auto; position: relative; z-index: 2;">
             <h2>Hive Sample: Global CAWI Collection</h2>
@@ -647,7 +151,7 @@ html_content = """<!DOCTYPE html>
                 </div>
             </div>
             
-            <div class="split-content" style="background: var(--white); padding: 3rem; border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.05); position: relative; z-index: 2;">
+            <div class="split-content" style="background: var(--white); padding: 3rem; border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.08); position: relative; z-index: 2;">
                 <h3>The Hive Sourcing Pipeline</h3>
                 <div class="pipeline">
                     <div class="pipeline-step">
@@ -671,11 +175,51 @@ html_content = """<!DOCTYPE html>
         </div>
     </section>
 
+    <!-- Secondary Research Section -->
+    <section id="secondary" style="background-color: var(--white);">
+        <span class="bee bee-a" style="top:10%; left:10%;">🐝</span>
+        <span class="bee bee-b" style="top:65%; left:80%;">🐝</span>
+        <span class="bee bee-c" style="top:40%; left:55%;">🐝</span>
+
+        <div class="split-section" style="align-items: center; margin-bottom: 2rem;">
+            <div class="split-content">
+                <h2>Hive Desk: Secondary & Syndicated Research</h2>
+                <h3 style="color: var(--light-text); font-size: 1.25rem; font-weight: 400; margin-top: 10px; margin-bottom: 20px;">Desk Research, Industry Data & Competitive Intelligence</h3>
+                <p>Not every brief needs a fresh fielding cycle. Sometimes the fastest path to a confident decision is knowing exactly what's already been published, measured, and modeled — and knowing how to read it. Hive Desk is our secondary research arm: we mine existing literature, syndicated datasets, and industry reporting to give you a grounded starting point before a single primary respondent is ever recruited, or a sharper lens to interpret the primary data once it's in.</p>
+                <p style="font-weight: 600; color: var(--dark-text);">Same rigor as our fieldwork, applied to everything that's already out there — so your budget goes to the questions no one has answered yet.</p>
+            </div>
+            
+            <div class="split-image">
+                <img src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Secondary research desk analysis and industry reports">
+            </div>
+        </div>
+        
+        <div class="grid-3" style="margin-top: 2rem;">
+            <div style="background: var(--section-bg); padding: 1.5rem; border-radius: 10px; border-left: 4px solid var(--primary-honey); position: relative; z-index: 2;">
+                <div class="icon-box">📚</div>
+                <h4 style="color: var(--dark-text); margin-bottom: 0.5rem; font-size: 1.15rem;">Rapid Desk Research <br><span style="font-weight: 400; color: var(--light-text); font-size: 0.95rem;">(Literature & Market Scans)</span></h4>
+                <p style="margin-bottom: 0; font-size: 0.95rem;">When timelines are tight, we compile and synthesize everything already on record — journal research, government data, trade publications, and prior client studies — into a clear, citation-backed briefing your team can act on in days, not weeks.</p>
+            </div>
+            
+            <div style="background: var(--section-bg); padding: 1.5rem; border-radius: 10px; border-left: 4px solid var(--primary-honey); position: relative; z-index: 2;">
+                <div class="icon-box">🗂️</div>
+                <h4 style="color: var(--dark-text); margin-bottom: 0.5rem; font-size: 1.15rem;">Syndicated & Industry Data <br><span style="font-weight: 400; color: var(--light-text); font-size: 0.95rem;">(Licensed & Public Sources)</span></h4>
+                <p style="margin-bottom: 0; font-size: 0.95rem;">We source, license, and normalize third-party datasets from paid syndicated providers and public repositories alike, translating dense industry reporting into the specific metrics your stakeholders actually need to see.</p>
+            </div>
+
+            <div style="background: var(--section-bg); padding: 1.5rem; border-radius: 10px; border-left: 4px solid var(--primary-honey); position: relative; z-index: 2;">
+                <div class="icon-box">🧭</div>
+                <h4 style="color: var(--dark-text); margin-bottom: 0.5rem; font-size: 1.15rem;">Competitive Intelligence <br><span style="font-weight: 400; color: var(--light-text); font-size: 0.95rem;">(Positioning & Benchmarking)</span></h4>
+                <p style="margin-bottom: 0; font-size: 0.95rem;">From pricing architecture to messaging shifts and market-share movement, we track your competitive set continuously, so every primary study you commission starts from an already-sharp picture of the landscape.</p>
+            </div>
+        </div>
+    </section>
+
     <!-- Lead Generation Section -->
     <section id="growth" style="background-color: var(--white);">
-        <span class="bee bee-c" style="top: 15%; left: 15%;">🐝</span>
-        <span class="bee bee-a" style="top: 45%; right: 15%;">🐝</span>
-        <span class="bee bee-b" style="top: 75%; left: 30%;">🐝</span>
+        <span class="bee bee-a" style="top:15%; left:75%;">🐝</span>
+        <span class="bee bee-b" style="top:70%; left:20%;">🐝</span>
+        <span class="bee bee-c" style="top:45%; left:50%;">🐝</span>
 
         <div class="split-section">
             <div class="split-content">
@@ -729,9 +273,9 @@ html_content = """<!DOCTYPE html>
 
     <!-- Contact Section -->
     <section id="contact" class="contact-section">
-        <span class="bee bee-b" style="top: 20%; right: 25%; filter: drop-shadow(0 3px 5px rgba(255,255,255,0.2));">🐝</span>
-        <span class="bee bee-c" style="top: 60%; left: 15%; filter: drop-shadow(0 3px 5px rgba(255,255,255,0.2));">🐝</span>
-        <span class="bee bee-a" style="top: 80%; right: 40%; filter: drop-shadow(0 3px 5px rgba(255,255,255,0.2));">🐝</span>
+        <span class="bee bee-a" style="top:20%; left:10%; opacity:0.35;">🐝</span>
+        <span class="bee bee-b" style="top:60%; left:85%; opacity:0.35;">🐝</span>
+        <span class="bee bee-c" style="top:35%; left:50%; opacity:0.35;">🐝</span>
 
         <div class="split-section">
             <div class="split-content">
@@ -779,8 +323,24 @@ html_content = """<!DOCTYPE html>
         </div>
     </section>
 
+    <!-- Cookie Consent Banner -->
+    <div class="cookie-banner" id="cookie-banner">
+        <p>🍯 We use cookies to run the Hive smoothly — to keep the site secure, understand how it's used, and improve your experience. See our <a href="cookie-policy.html" target="_blank" rel="noopener">Cookie Policy</a> for details.</p>
+        <div class="cookie-actions">
+            <button class="btn-decline" id="cookie-decline">Decline</button>
+            <button class="btn-accept" id="cookie-accept">Accept</button>
+        </div>
+    </div>
+
     <div class="footer-bottom">
-        <p>&copy; 2026 Service Hive. All rights reserved. The Modern Growth & Delivery Engine.</p>
+        <div class="footer-legal-links">
+            <a href="privacy-policy.html" target="_blank" rel="noopener">Privacy Policy</a>
+            <span class="footer-dot">•</span>
+            <a href="cookie-policy.html" target="_blank" rel="noopener">Cookie Policy</a>
+            <span class="footer-dot">•</span>
+            <a href="assets/documents/ServiceHive_GDPR_Policy.pdf" download>GDPR Policy (PDF)</a>
+        </div>
+        <p>&copy; 2026 Service Hive. All rights reserved. Service Hive.</p>
     </div>
 
     <!-- JavaScript for Mobile Menu -->
@@ -801,6 +361,37 @@ html_content = """<!DOCTYPE html>
                 mobileMenu.classList.remove('active');
                 navLinks.classList.remove('active');
             });
+        });
+
+        // Cookie Consent Banner
+        // Note: uses localStorage to remember the choice (works reliably whether this
+        // page is opened as a local file or hosted on a server; falls back gracefully
+        // if storage is unavailable).
+        function getConsent() {
+            try { return localStorage.getItem('servicehive_cookie_consent'); }
+            catch (e) { return null; }
+        }
+        function setConsent(value) {
+            try { localStorage.setItem('servicehive_cookie_consent', value); }
+            catch (e) { /* storage unavailable - banner will simply show again next visit */ }
+        }
+
+        const cookieBanner = document.getElementById('cookie-banner');
+        const cookieAccept = document.getElementById('cookie-accept');
+        const cookieDecline = document.getElementById('cookie-decline');
+
+        if (!getConsent()) {
+            setTimeout(() => cookieBanner.classList.add('visible'), 900);
+        }
+
+        cookieAccept.addEventListener('click', () => {
+            setConsent('accepted');
+            cookieBanner.classList.remove('visible');
+        });
+
+        cookieDecline.addEventListener('click', () => {
+            setConsent('declined');
+            cookieBanner.classList.remove('visible');
         });
     </script>
 
